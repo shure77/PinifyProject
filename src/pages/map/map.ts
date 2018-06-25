@@ -26,10 +26,6 @@ export class MapPage {
     }, 2000)
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MapPage');
-  }
-
   GoogleMap () {
     const location = new google.maps.LatLng(48.205513,15.623266);
    
@@ -52,7 +48,7 @@ export class MapPage {
                         '</div>';
 
     var cinemaInfowindow = new google.maps.InfoWindow({
-      maxWidth: 320,
+      maxWidth: 280,
       content: contentString
     });
 
@@ -88,6 +84,6 @@ export class MapPage {
  
 }
 goToHome() {
-  this.navCtrl.push(HomePage);
+ this.navCtrl.popToRoot(HomePage);
 }
 }
