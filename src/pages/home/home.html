@@ -1,14 +1,69 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Pinify
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <h3>Pin your favourite spot!</h3>
+
+    <ion-list>
+
+        <ion-item>
+          <ion-label floating>Spot Name</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating>Spot Website</ion-label>
+          <ion-input type="url"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Spot Address</ion-label>
+            <ion-input type="search"></ion-input>
+          </ion-item>
+
+        <ion-item>
+            <ion-label floating>Spot Description</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+      </ion-list>
+
+      <ion-list radio-group [(ngModel)]="typeOfRecommendation">
+          <ion-list-header>
+              <h3>Choose Spot Type</h3>
+            </ion-list-header>
+          
+            <ion-item>
+              <ion-label><ion-icon name="medical"></ion-icon>  Culture</ion-label>
+              <ion-radio value="culture"></ion-radio>
+            </ion-item>
+          
+            <ion-item>
+              <ion-label><ion-icon name="beer"></ion-icon>  Nightlife</ion-label>
+              <ion-radio value="nightlife"></ion-radio>
+            </ion-item>
+          
+            <ion-item>
+              <ion-label><ion-icon name="football"></ion-icon>  Sports</ion-label>
+              <ion-radio value="sports"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+                <ion-label><ion-icon name="cart"></ion-icon>  Shopping</ion-label>
+                <ion-radio value="shopping"></ion-radio>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label><ion-icon name="cafe"></ion-icon>  Cafe</ion-label>
+                  <ion-radio value="cafe"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+    <p>
+      <button ion-button color="primary" (click)="goToMap()">Create Spot</button> 
+    </p>
 </ion-content>
