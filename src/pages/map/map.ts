@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 declare var google;
 
-/**
- * Generated class for the MapPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-map',
@@ -28,11 +21,13 @@ export class MapPage {
 
   GoogleMap () {
     const location = new google.maps.LatLng(48.205513,15.623266);
+    
    
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
       center: location
     });
+
 
     var contentString= '<div id="content"'+
                         '<div id="siteNotice">'+
@@ -53,6 +48,8 @@ export class MapPage {
     });
 
     this.image = 'assets/imgs/IconCafe.png';
+
+
     const pointCinema = {lat: 48.205513, lng: 15.623266};
     let cinemaMarker = new google.maps.Marker({
       position: pointCinema,
@@ -84,6 +81,6 @@ export class MapPage {
  
 }
 goToHome() {
- this.navCtrl.popToRoot(HomePage);
+ this.navCtrl.push(HomePage);
 }
 }
