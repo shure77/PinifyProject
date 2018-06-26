@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { Spots } from '../../spot';
 declare var google;
 
 @IonicPage()
@@ -19,9 +20,18 @@ export class MapPage {
     }, 2000)
   }
 
+  ionViewDidLoad(){
+   console.log (this.navParams.get('name'));
+
+  }
+
   GoogleMap () {
+
     const location = new google.maps.LatLng(48.205513,15.623266);
-    
+    const name = this.navParams.get('name');
+    const description = this.navParams.get('description');
+    const website = this.navParams.get('website');
+    this.image = this.navParams.get('spotType');
    
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
@@ -32,12 +42,10 @@ export class MapPage {
     var contentString= '<div id="content"'+
                         '<div id="siteNotice">'+
                         '</div>'+
-                        '<h1 id="firstHeading" class="firstHeading">Cinema Paradiso</h1>'+
+                        '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>'+
                         '<div id="bodyContent">'+
-                        '<p><b>Cinema Paradiso</b>, is an easy going and chilled out Cafe ' +
-                        'which serves the best coffee in town. Make sure to check out their '+
-                        'Empanadas, too. And yes, actually it is a cinema playing mostly european arthouse movies!'+
-                        '<p>Attribution: Cinema Paradiso, <a href="http://www.cinema-paradiso.at/st-poelten/" target="_blank">'+
+                        description +
+                        '<p>' + name + ', <a href="http://' + website + '" target="_blank">'+
                         'Go to Website.</p>'+
                         '</div>'+
                         '</div>';
@@ -47,15 +55,13 @@ export class MapPage {
       content: contentString
     });
 
-    this.image = 'assets/imgs/IconCafe.png';
-
-
     const pointCinema = {lat: 48.205513, lng: 15.623266};
+    
     let cinemaMarker = new google.maps.Marker({
       position: pointCinema,
       map: this.map,
       icon: this.image,
-      title: 'Cinema Paradiso'
+      title: name   
     });
     cinemaMarker.addListener('click', function(){
       cinemaInfowindow.open(Map, cinemaMarker);

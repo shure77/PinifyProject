@@ -13,12 +13,12 @@
 
         <ion-item>
           <ion-label floating>Spot Name</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]="spots.name" type="text"></ion-input>
         </ion-item>
       
         <ion-item>
-          <ion-label floating>Spot Website</ion-label>
-          <ion-input type="url"></ion-input>
+          <ion-label stacked>Spot Website</ion-label>
+          <ion-input [(ngModel)]="spots.website" type="url" placeholder="www.websiteaddress.com"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -28,7 +28,7 @@
 
         <ion-item>
             <ion-label floating>Spot Description</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="spots.description" type="text"></ion-input>
           </ion-item>
       </ion-list>
 
@@ -37,27 +37,27 @@
           
             <ion-item>
               <ion-label><ion-icon name="medical"></ion-icon>  Culture</ion-label>
-              <ion-radio value="culture"></ion-radio>
+              <ion-radio value="culture" (ionSelect)="radioChangeHandler('assets/imgs/IconCulture.png')"></ion-radio>
             </ion-item>
           
             <ion-item>
               <ion-label><ion-icon name="beer"></ion-icon>  Nightlife</ion-label>
-              <ion-radio value="nightlife"></ion-radio>
+              <ion-radio value="nightlife" (ionSelect)="radioChangeHandler('assets/imgs/IconBeer.png')"></ion-radio>
             </ion-item>
           
             <ion-item>
               <ion-label><ion-icon name="football"></ion-icon>  Sports</ion-label>
-              <ion-radio value="sports"></ion-radio>
+              <ion-radio value="sports" (ionSelect)="radioChangeHandler('assets/imgs/IconSports.png')"></ion-radio>
             </ion-item>
 
             <ion-item>
                 <ion-label><ion-icon name="cart"></ion-icon>  Shopping</ion-label>
-                <ion-radio value="shopping"></ion-radio>
+                <ion-radio value="shopping" (ionSelect)="radioChangeHandler('assets/imgs/IconCart.png')"></ion-radio>
               </ion-item>
 
               <ion-item>
                   <ion-label><ion-icon name="cafe"></ion-icon>  Cafe</ion-label>
-                  <ion-radio value="cafe"></ion-radio>
+                  <ion-radio value="cafe" (ionSelect)="radioChangeHandler('assets/imgs/IconCafe.png')"></ion-radio>
                 </ion-item>
               </ion-list>
 
