@@ -23,7 +23,7 @@
 
         <ion-item>
             <ion-label floating>Spot Address</ion-label>
-            <ion-input type="search"></ion-input>
+            <ion-input id='adress' [(ngModel)]="spots.address" type="search"></ion-input>
           </ion-item>
 
         <ion-item>
@@ -33,7 +33,7 @@
       </ion-list>
 
       <h3 class="headTitle">Choose Spot Type</h3>
-      <ion-list radio-group [(ngModel)]="typeOfRecommendation">
+      <ion-list radio-group>
           
             <ion-item>
               <ion-label><ion-icon name="medical"></ion-icon>  Culture</ion-label>
@@ -62,6 +62,6 @@
               </ion-list>
 
     <p>
-      <button ion-button color="primary" (click)="goToMap()">Create Spot</button> 
+      <button id="submitBtn" ion-button color="primary" (click)="goToMap()">Create Spot</button> 
     </p>
 </ion-content>

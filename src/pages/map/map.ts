@@ -22,23 +22,28 @@ export class MapPage {
 
   ionViewDidLoad(){
    console.log (this.navParams.get('name'));
+   console.log(this.navParams.get('latitude'));
 
   }
 
   GoogleMap () {
 
-    const location = new google.maps.LatLng(48.205513,15.623266);
+    const latitude = this.navParams.get('latitude');
+    const longitude = this.navParams.get('longitude');
+    const mapLocation = new google.maps.LatLng(latitude, longitude);
     const name = this.navParams.get('name');
     const description = this.navParams.get('description');
     const website = this.navParams.get('website');
     this.image = this.navParams.get('spotType');
+    const pinLocation = {lat: latitude, lng: longitude};
    
+    /* Setup the map and center it */
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
-      center: location
+      center: mapLocation
     });
 
-
+/* Define the Information Window */
     var contentString= '<div id="content"'+
                         '<div id="siteNotice">'+
                         '</div>'+
@@ -50,22 +55,23 @@ export class MapPage {
                         '</div>'+
                         '</div>';
 
-    var cinemaInfowindow = new google.maps.InfoWindow({
+    var infoWindow = new google.maps.InfoWindow({
       maxWidth: 280,
       content: contentString
     });
-
-    const pointCinema = {lat: 48.205513, lng: 15.623266};
     
-    let cinemaMarker = new google.maps.Marker({
-      position: pointCinema,
+/* Create and position the pin on the map */
+
+    let pin = new google.maps.Marker({
+      position: pinLocation,
       map: this.map,
       icon: this.image,
       title: name   
     });
-    cinemaMarker.addListener('click', function(){
-      cinemaInfowindow.open(Map, cinemaMarker);
+    pin.addListener('click', function(){
+      infoWindow.open(Map, pin);
     });
+    
     
    /*  this.image = 'assets/imgs/IconCafe.png';
     let beachMarker1 = new google.maps.Marker({

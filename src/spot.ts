@@ -3,4 +3,5 @@ export class Spots {
     description: string;
     website: string;
     spotType: string;
+    address: string;
   } 
