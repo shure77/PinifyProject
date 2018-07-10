@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Spots } from '../../spot';
-declare var google;
+declare var google: any;
 
 @IonicPage()
 @Component({
@@ -56,7 +56,7 @@ export class MapPage {
                         '</div>';
 
     var infoWindow = new google.maps.InfoWindow({
-      maxWidth: 280,
+      maxWidth: 250,
       content: contentString
     });
     

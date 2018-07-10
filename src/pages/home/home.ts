@@ -4,7 +4,8 @@ import { MapPage } from '../map/map';
 import { Spots } from '../../spot';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
-declare var google;
+import { } from 'googlemaps';
+declare var google: any;
 
 @Component({
   selector: 'page-home',
