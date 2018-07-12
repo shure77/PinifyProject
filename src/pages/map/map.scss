@@ -7,5 +7,22 @@ page-map {
     #content{
         width: 20px;
     }
+
+    .fab[normal]{
+        background-color:#ff4081; 
+        color: white;  
+        position: fixed;
+        margin: 5px;
+        bottom: 0;
+        left: 0;
+        size: 200%;
+        -webkit-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+       -moz-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+            box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+    }
+
+    .fab[normal]:hover {
+        background-color: #ff4060;
+      }
     
     }

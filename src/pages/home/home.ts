@@ -4,8 +4,10 @@ import { MapPage } from '../map/map';
 import { Spots } from '../../spot';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
-import { } from 'googlemaps';
+import {} from 'googlemaps';
+import { Storage } from '@ionic/storage';
 declare var google: any;
+let pinArray = [];
 
 @Component({
   selector: 'page-home',
@@ -29,13 +31,18 @@ export class HomePage {
   }
 
   public nav: NavController; 
-  constructor(public navCtrl: NavController, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, public NavParams: NavParams) {
+  constructor(private storage: Storage, public navCtrl: NavController, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, public NavParams: NavParams) {
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
   }
 
   ionViewDidLoad() {
+    if (this.storage != null) {
+    this.storage.get('data').then((val) => {
+      pinArray = val;
+  })} 
+
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
@@ -73,8 +80,20 @@ private setCurrentPosition() {
           this.zoom = 12;
       });
   }
-}
+};
 
+saveToStorage() {
+  let newPinItem = {"name" : this.spots.name, "website" : this.spots.website, "description" : this.spots.description, "spotType" : this.spots.spotType, "latitude" : this.latitude, "longitude" : this. longitude};
+  if (pinArray != null){
+  pinArray.push(newPinItem);}
+  else {
+    pinArray = [];
+    pinArray.push(newPinItem);
+  }
+  this.storage.set('data', pinArray);
+  
+
+}
   goToMap() {
     let data = {
       name: this.spots.name,
@@ -84,12 +103,26 @@ private setCurrentPosition() {
       latitude: this.latitude,
       longitude: this.longitude
     }
-
     this.navCtrl.push(MapPage, data);
+
+   /*  this.storage.get('data').then((val) => {
+      console.log(val);
+  }) */
   }
 
   radioChangeHandler(answer){
     this.spots.spotType = answer;
   }
 
+showStorage (){
+  this.storage.get('data').then((val) => {
+    console.log(val);
+})
+}
+
+clearStorage (){
+  this.storage.clear();
+  pinArray = [];
+  console.log("cleared");
+}
 }

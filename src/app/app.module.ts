@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MapPage } from '../pages/map/map';
 import { AgmCoreModule } from '@agm/core';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -19,11 +20,12 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-      AgmCoreModule.forRoot({
+    AgmCoreModule.forRoot({
         apiKey: "AIzaSyCaq_Li-WmUgk7rTdbM4UcMvmrd_1T3lhE",
         libraries: ["places"]
-      })
-  ],
+      }),
+    IonicStorageModule.forRoot()
+    ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,

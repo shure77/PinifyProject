@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { Spots } from '../../spot';
+import { Storage } from '@ionic/storage';
 declare var google: any;
 
 @IonicPage()
@@ -13,7 +13,7 @@ export class MapPage {
   map: any;
   image: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private storage: Storage, public navCtrl: NavController, public navParams: NavParams) {
     const that = this;
     setTimeout(function () {
       that.GoogleMap();
@@ -21,27 +21,38 @@ export class MapPage {
   }
 
   ionViewDidLoad(){
-   console.log (this.navParams.get('name'));
-   console.log(this.navParams.get('latitude'));
+   /* this.storage.get('data').then((val) => {
+    for (let i in val){ 
+    var name = val[i].name;
+    var website = val[i].website;
+    var description = val[i].description;
+    var image = val[i].spotType;
+    var pinLocation = {lat: val[i].latitude, lng: val[i].longitude}; */
+    
 
-  }
+ /*    }
+  }); */ 
+}
 
   GoogleMap () {
-
-    const latitude = this.navParams.get('latitude');
-    const longitude = this.navParams.get('longitude');
-    const mapLocation = new google.maps.LatLng(latitude, longitude);
-    const name = this.navParams.get('name');
-    const description = this.navParams.get('description');
-    const website = this.navParams.get('website');
-    this.image = this.navParams.get('spotType');
-    const pinLocation = {lat: latitude, lng: longitude};
-   
     /* Setup the map and center it */
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
-      center: mapLocation
+      center: new google.maps.LatLng(48.206329, 15.623221)
     });
+
+    this.storage.get('data').then((val) => {
+      for (let i in val){
+    const latitude = val[i].latitude;
+    const longitude = val[i].longitude;
+    //const mapLocation = new google.maps.LatLng(latitude, longitude);
+    const name = val[i].name;
+    const description = val[i].description;
+    const website = val[i].website;
+    this.image = val[i].spotType;
+    const pinLocation = {lat: latitude, lng: longitude};
+   
+    
 
 /* Define the Information Window */
     var contentString= '<div id="content"'+
@@ -55,10 +66,7 @@ export class MapPage {
                         '</div>'+
                         '</div>';
 
-    var infoWindow = new google.maps.InfoWindow({
-      maxWidth: 250,
-      content: contentString
-    });
+    
     
 /* Create and position the pin on the map */
 
@@ -66,33 +74,27 @@ export class MapPage {
       position: pinLocation,
       map: this.map,
       icon: this.image,
-      title: name   
+      title: name,
+      animation: google.maps.Animation.DROP,
+      info: contentString
     });
-    pin.addListener('click', function(){
-      infoWindow.open(Map, pin);
+    google.maps.event.addListener( pin, 'click', function() {
+
+      infoWindow.setContent( this.info );
+      infoWindow.open( Map, this );
+   
+   });
+  
+    var infoWindow = new google.maps.InfoWindow({
+      maxWidth: 250,
+      content: contentString
     });
     
-    
-   /*  this.image = 'assets/imgs/IconCafe.png';
-    let beachMarker1 = new google.maps.Marker({
-      position: {lat: 48.204651, lng: 15.625694},
-      map: this.map,
-      icon: this.image,
-      title: 'Cafe Schubert'
-    });
-
-    this.image = 'assets/imgs/IconCafe.png';
-    let beachMarker2 = new google.maps.Marker({
-      position: {lat: 48.20373, lng: 15.623767},
-      map: this.map,
-      icon: this.image,
-      title: 'Cafe Emmi'
-    });
-  } */
-
- 
 }
-goToHome() {
- this.navCtrl.push(HomePage);
+});  
+}
+restartApp() {
+ //this.navCtrl.push(HomePage);
+ document.location.href='index.html';
 }
 }
