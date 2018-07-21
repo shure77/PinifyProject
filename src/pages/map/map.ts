@@ -20,26 +20,18 @@ export class MapPage {
     }, 2000)
   }
 
-  ionViewDidLoad(){
-   /* this.storage.get('data').then((val) => {
-    for (let i in val){ 
-    var name = val[i].name;
-    var website = val[i].website;
-    var description = val[i].description;
-    var image = val[i].spotType;
-    var pinLocation = {lat: val[i].latitude, lng: val[i].longitude}; */
-    
-
- /*    }
-  }); */ 
-}
-
   GoogleMap () {
     /* Setup the map and center it */
-    this.map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: new google.maps.LatLng(48.206329, 15.623221)
-    });
+    this.storage.get('data').then((val) => {
+      const latitude = val[0].latitude;
+      const longitude = val[0].longitude;
+
+      this.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: new google.maps.LatLng(latitude, longitude)
+      });
+    })
+    
 
     this.storage.get('data').then((val) => {
       for (let i in val){
@@ -58,7 +50,7 @@ export class MapPage {
     var contentString= '<div id="content"'+
                         '<div id="siteNotice">'+
                         '</div>'+
-                        '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>'+
+                        '<h2 id="firstHeading" class="firstHeading">' + name + '</h2>'+
                         '<div id="bodyContent">'+
                         description +
                         '<p>' + name + ', <a href="http://' + website + '" target="_blank">'+
@@ -94,7 +86,6 @@ export class MapPage {
 });  
 }
 restartApp() {
- //this.navCtrl.push(HomePage);
  document.location.href='index.html';
 }
 }
